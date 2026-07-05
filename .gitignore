@@ -1,0 +1,12 @@
+# Universal
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.log
+*.tmp
+.vscode/
+.idea/
+
+# Project-specific
+.specify/

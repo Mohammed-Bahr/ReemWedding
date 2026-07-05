@@ -52,6 +52,7 @@ body::before{
   to{ background-position:280px 280px; }
 }
 
+
 section{ position:relative; z-index:1; }
 
 /* ==========================================================
@@ -327,6 +328,65 @@ section{ position:relative; z-index:1; }
 @keyframes birdFlap{
   0%,100%{ transform:scaleY(1); }
   50%{ transform:scaleY(0.6); }
+}
+
+/* ==========================================================
+   زهور متساقطة من الجانبين أثناء التمرير (Falling Side Flowers)
+========================================================== */
+#side-flowers{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2;
+  overflow:hidden;
+}
+
+.side-flower{
+  position:fixed;
+  pointer-events:none;
+  will-change:transform;
+  opacity:0.6;
+  line-height:1;
+  animation:flowerFall linear forwards;
+  z-index:2;
+}
+.side-flower--left{
+  left:8px;
+}
+.side-flower--right{
+  right:8px;
+}
+.side-flower--exiting{
+  opacity:0 !important;
+  transition:opacity 0.6s ease;
+  animation:none;
+}
+
+@keyframes flowerFall{
+  0%{
+    transform:translateY(0) translateX(0) rotate(0deg);
+    opacity:0;
+  }
+  4%{
+    opacity:var(--flower-opacity, 0.6);
+  }
+  20%{
+    transform:translateY(20vh) translateX(var(--sway-1, 15px)) rotate(var(--rot-1, 30deg));
+  }
+  40%{
+    transform:translateY(40vh) translateX(var(--sway-2, -10px)) rotate(var(--rot-2, 80deg));
+  }
+  60%{
+    transform:translateY(60vh) translateX(var(--sway-3, 20px)) rotate(var(--rot-3, 130deg));
+  }
+  80%{
+    transform:translateY(80vh) translateX(var(--sway-4, -8px)) rotate(var(--rot-4, 170deg));
+    opacity:var(--flower-opacity, 0.6);
+  }
+  100%{
+    transform:translateY(105vh) translateX(var(--sway-5, 5px)) rotate(var(--rot-5, 200deg));
+    opacity:0;
+  }
 }
 
 /* ==========================================================
@@ -902,4 +962,14 @@ footer{
 /* احترام تفضيل تقليل الحركة */
 @media (prefers-reduced-motion: reduce){
   *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; }
+}
+
+/* زهور متساقطة — إخفاء عند الطباعة */
+@media print{
+  #side-flowers{ display:none !important; }
+}
+
+/* زهور متساقطة — دعم المتصفحات القديمة */
+@supports not (animation-name: flowerFall){
+  #side-flowers{ display:none !important; }
 }

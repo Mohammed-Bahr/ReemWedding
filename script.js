@@ -244,3 +244,150 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 })();
+
+/* ============================================================
+   6) الزهور المتساقطة من الجانبين أثناء التمرير
+============================================================ */
+(function initSideFlowers() {
+  'use strict';
+
+  /* --- الزهور والأنماط اللونية --- */
+  var FLOWER_TYPES = ['❀', '✿', '❁', '🌸', '🌺'];
+  var FLOWER_COLORS = [
+    'var(--gold)', 'var(--gold-light)', 'var(--gold-dark)',
+    'var(--cream)', 'var(--ivory)', '#e8b4b8'
+  ];
+
+  /**
+   * Obtient la configuration selon la largeur de l'écran
+   */
+  function getConfig() {
+    var w = window.innerWidth;
+    if (w > 1024) {
+      return { maxFlowers: 20, intervalLeft: [400, 700], intervalRight: [500, 900], sizeMin: 16, sizeMax: 28, speedMin: 6, speedMax: 14 };
+    } else if (w > 480) {
+      return { maxFlowers: 14, intervalLeft: [500, 900], intervalRight: [600, 1000], sizeMin: 14, sizeMax: 24, speedMin: 6, speedMax: 12 };
+    } else {
+      return { maxFlowers: 10, intervalLeft: [600, 1000], intervalRight: [700, 1200], sizeMin: 12, sizeMax: 20, speedMin: 5, speedMax: 10 };
+    }
+  }
+
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+  function randInt(min, max) { return Math.floor(rand(min, max + 1)); }
+
+  /* --- حالة المولّد --- */
+  var container = document.getElementById('side-flowers');
+  if (!container) return;
+
+  var config = getConfig();
+  var activeFlowers = 0;
+  var leftTimer = null;
+  var rightTimer = null;
+  var isRunning = false;
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* --- إنشاء زهرة واحدة --- */
+  function spawnFlower(side) {
+    if (reducedMotion) return null;
+    if (activeFlowers >= config.maxFlowers) return null;
+
+    var el = document.createElement('div');
+    el.className = 'side-flower side-flower--' + side;
+    el.textContent = FLOWER_TYPES[randInt(0, FLOWER_TYPES.length - 1)];
+    el.style.color = FLOWER_COLORS[randInt(0, FLOWER_COLORS.length - 1)];
+    el.style.fontSize = rand(config.sizeMin, config.sizeMax) + 'px';
+
+    /* valeurs aléatoires pour l'animation CSS */
+    var speed = rand(config.speedMin, config.speedMax);
+    el.style.animationDuration = speed + 's';
+    el.style.setProperty('--flower-opacity', rand(0.4, 0.75));
+    el.style.setProperty('--sway-1', rand(-25, 25) + 'px');
+    el.style.setProperty('--sway-2', rand(-20, 20) + 'px');
+    el.style.setProperty('--sway-3', rand(-30, 30) + 'px');
+    el.style.setProperty('--sway-4', rand(-15, 15) + 'px');
+    el.style.setProperty('--sway-5', rand(-10, 10) + 'px');
+    el.style.setProperty('--rot-1', rand(20, 50) + 'deg');
+    el.style.setProperty('--rot-2', rand(60, 110) + 'deg');
+    el.style.setProperty('--rot-3', rand(100, 160) + 'deg');
+    el.style.setProperty('--rot-4', rand(150, 200) + 'deg');
+    el.style.setProperty('--rot-5', rand(180, 250) + 'deg');
+
+    /* position verticale de départ aléatoire sur le bord */
+    el.style.top = rand(0, 90) + 'vh';
+
+    container.appendChild(el);
+    activeFlowers++;
+
+    /* nettoyage automatique à la fin de l'animation */
+    el.addEventListener('animationend', function onEnd() {
+      el.removeEventListener('animationend', onEnd);
+      el.remove();
+      activeFlowers = Math.max(0, activeFlowers - 1);
+    });
+
+    return el;
+  }
+
+  /* --- démarrage des intervalles --- */
+  function start() {
+    if (isRunning || reducedMotion) return;
+    isRunning = true;
+
+    var c = getConfig();
+    function leftSpawn() { spawnFlower('left'); }
+    function rightSpawn() { spawnFlower('right'); }
+
+    leftTimer = setInterval(leftSpawn, rand(c.intervalLeft[0], c.intervalLeft[1]));
+    rightTimer = setInterval(rightSpawn, rand(c.intervalRight[0], c.intervalRight[1]));
+  }
+
+  /* --- arrêt des intervalles --- */
+  function stop() {
+    isRunning = false;
+    if (leftTimer) { clearInterval(leftTimer); leftTimer = null; }
+    if (rightTimer) { clearInterval(rightTimer); rightTimer = null; }
+  }
+
+  /* --- destruction complète --- */
+  function destroy() {
+    stop();
+    var flowers = container.querySelectorAll('.side-flower');
+    for (var i = 0; i < flowers.length; i++) { flowers[i].remove(); }
+    activeFlowers = 0;
+  }
+
+  /* --- ré-écoute du redimensionnement --- */
+  var resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+      config = getConfig();
+      if (activeFlowers > config.maxFlowers) {
+        /* réduire le nombre de fleurs si nécessaire */
+        var flowers = container.querySelectorAll('.side-flower');
+        var toRemove = activeFlowers - config.maxFlowers;
+        for (var i = 0; i < toRemove && i < flowers.length; i++) {
+          flowers[i].classList.add('side-flower--exiting');
+          setTimeout(function(el) { el.remove(); activeFlowers = Math.max(0, activeFlowers - 1); }, 600, flowers[i]);
+        }
+      }
+    }, 300);
+  });
+
+  /* --- ré-écoute des préférences de mouvement --- */
+  var motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
+  motionMedia.addEventListener('change', function(e) {
+    reducedMotion = e.matches;
+    if (reducedMotion) { destroy(); }
+    else { start(); }
+  });
+
+  /* --- intégration au cycle de vie de la page --- */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(start, 1200); /* après le loader */
+    });
+  } else {
+    setTimeout(start, 1200);
+  }
+})();

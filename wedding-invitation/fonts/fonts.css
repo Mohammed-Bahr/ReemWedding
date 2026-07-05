@@ -1,0 +1,15 @@
+@font-face {
+    font-family: 'Denistina';
+    src: url('Denistina.woff2') format('woff2'),
+        url('Denistina.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'mr_HamiltoneG';
+    src: url('../fonts/mr_hamiltoneg.woff2') format('woff2'),
+        url('../fonts/mr_hamiltoneg.ttf') format('truetype'),
+        url('../fonts/mr_hamiltoneg.svg#mr_hamiltoneg') format('svg');
+}
