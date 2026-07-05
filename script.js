@@ -203,14 +203,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('bgMusic');
   const indicator = document.getElementById('music-indicator');
   const icon = document.getElementById('musicIcon');
-  let started = true;
+  let started = false;
 
   function markPlaying() {
     started = true;
     indicator.classList.remove('muted');
     icon.textContent = '🔊';
   }
-  function markBlocked() {
+  function markMuted() {
+    started = false;
     indicator.classList.add('muted');
     icon.textContent = '🔈';
   }
@@ -218,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function tryPlay() {
     const playPromise = audio.play();
     if (playPromise !== undefined) {
-      playPromise.then(markPlaying).catch(markBlocked);
+      playPromise.then(markPlaying).catch(markMuted);
     }
   }
 
@@ -234,13 +235,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   fallbackEvents.forEach(evt => document.addEventListener(evt, fallbackStart, { once: false, passive: true }));
 
-  /* المؤشر يسمح بكتم/إعادة تشغيل الصوت يدويًا لمن يرغب فقط */
-  indicator.addEventListener('click', () => {
+  /* زر المؤشر: تشغيل / إيقاف الموسيقى */
+  indicator.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (audio.paused) {
       tryPlay();
     } else {
       audio.pause();
-      markBlocked();
+      markMuted();
     }
   });
 })();
