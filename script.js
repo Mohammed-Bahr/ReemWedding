@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('bgMusic');
   const indicator = document.getElementById('music-indicator');
   const icon = document.getElementById('musicIcon');
-  let started = false;
+  let started = true;
 
   function markPlaying() {
     started = true;
