@@ -1,428 +1,602 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-    />
-    <title>Engagement invitation</title>
-    <link rel="icon" type="image/png" href="./Assets/ring.png" />
-    <!-- ============================================================
+    <head>
+        <meta charset="UTF-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+        />
+        <title>Engagement invitation</title>
+        <link rel="icon" type="image/png" href="./Assets/ring.png" />
+        <!-- ============================================================
      GOOGLE FONTS
      Amiri      : للخط العربي الكلاسيكي الفخم (العناوين والآية)
      Aref Ruqaa : لخط الأسماء بطابع خط الرقعة الفني
      Cairo      : للنصوص العادية بشكل عصري وواضح
 ============================================================ -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@200;300;400;600;700;900&display=swap"
-      rel="stylesheet"
-    />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@200;300;400;600;700;900&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- شاشة التحميل — اضغط لتشغيل الموسيقى -->
-    <div id="loader">
-      <div class="loader-music-screen">
-        <div class="loader-ornament">
-          <div class="loader-diamond"></div>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <!-- شاشة التحميل — اضغط لتشغيل الموسيقى -->
+        <div id="loader">
+            <div class="loader-music-screen">
+                <div class="loader-ornament">
+                    <div class="loader-diamond"></div>
+                </div>
+                <button
+                    id="musicStartBtn"
+                    class="music-start-btn"
+                    aria-label="تشغيل الموسيقى"
+                >
+                    <span class="music-start-icon">♫</span>
+                    <span class="music-start-label">اضغط ل نبدأ رحلتنا </span>
+                </button>
+            </div>
         </div>
-        <button
-          id="musicStartBtn"
-          class="music-start-btn"
-          aria-label="تشغيل الموسيقى"
-        >
-          <span class="music-start-icon">♫</span>
-          <span class="music-start-label">اضغط ل نبدأ رحلتنا </span>
-        </button>
-      </div>
-    </div>
 
-    <!-- زخارف جانبية ثابتة على اليمين واليسار -->
-    <div class="side-decor side-decor-right" aria-hidden="true">
-      <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
-        <use href="#side-ornament-pattern"></use>
-      </svg>
-    </div>
-    <div class="side-decor side-decor-left" aria-hidden="true">
-      <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
-        <use href="#side-ornament-pattern"></use>
-      </svg>
-    </div>
+        <!-- زخارف جانبية ثابتة على اليمين واليسار -->
+        <div class="side-decor side-decor-right" aria-hidden="true">
+            <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
+                <use href="#side-ornament-pattern"></use>
+            </svg>
+        </div>
+        <div class="side-decor side-decor-left" aria-hidden="true">
+            <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
+                <use href="#side-ornament-pattern"></use>
+            </svg>
+        </div>
 
-    <!-- زخارف الحديقة الجانبية (تضاف فوق الذهبية) -->
-    <div class="garden-side garden-side-right" aria-hidden="true">
-      <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
-        <use href="#garden-pattern"></use>
-      </svg>
-    </div>
-    <div class="garden-side garden-side-left" aria-hidden="true">
-      <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
-        <use href="#garden-pattern"></use>
-      </svg>
-    </div>
+        <!-- زخارف الحديقة الجانبية (تضاف فوق الذهبية) -->
+        <div class="garden-side garden-side-right" aria-hidden="true">
+            <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
+                <use href="#garden-pattern"></use>
+            </svg>
+        </div>
+        <div class="garden-side garden-side-left" aria-hidden="true">
+            <svg viewBox="0 0 80 900" preserveAspectRatio="xMidYMin slice">
+                <use href="#garden-pattern"></use>
+            </svg>
+        </div>
 
-    <!-- أغصان خضراء متحركة في الخلفية -->
-    <div class="garden-branch garden-branch-right" aria-hidden="true">
-      <div class="garden-branch-inner">
-        <div class="garden-branch-secondary"></div>
-      </div>
-    </div>
-    <div class="garden-branch garden-branch-left" aria-hidden="true">
-      <div class="garden-branch-inner">
-        <div class="garden-branch-secondary"></div>
-      </div>
-    </div>
+        <!-- أغصان شجر مزخرفة متحركة تتدلى من الزاويتين العلويتين -->
+        <div class="garden-branch garden-branch-right" aria-hidden="true">
+            <div class="garden-branch-inner">
+                <svg
+                    class="branch-svg"
+                    viewBox="0 0 220 640"
+                    preserveAspectRatio="xMaxYMin meet"
+                >
+                    <path
+                        class="branch-trunk"
+                        d="M210,-20 C190,40 205,90 175,130 C150,165 165,205 135,245 C110,280 125,320 95,360 C70,395 85,435 55,470 C35,495 45,525 20,555"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M175,130 C195,140 210,135 222,115"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M135,245 C110,240 90,250 72,272"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M95,360 C118,352 138,360 150,340"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M55,470 C32,462 12,472 -2,455"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="198"
+                        y="103"
+                        transform="rotate(-25 198 103) scale(0.9)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="216"
+                        y="106"
+                        transform="scale(0.85)"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="58"
+                        y="263"
+                        transform="rotate(200 58 263) scale(0.8)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="66"
+                        y="276"
+                        transform="scale(0.7)"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="143"
+                        y="333"
+                        transform="rotate(-10 143 333) scale(0.75)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="150"
+                        y="336"
+                        transform="scale(0.65)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="-6"
+                        y="450"
+                        transform="scale(0.6)"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="16"
+                        y="548"
+                        transform="rotate(150 16 548) scale(0.7)"
+                    />
+                </svg>
+            </div>
+        </div>
+        <div class="garden-branch garden-branch-left" aria-hidden="true">
+            <div class="garden-branch-inner">
+                <svg
+                    class="branch-svg"
+                    viewBox="0 0 220 640"
+                    preserveAspectRatio="xMaxYMin meet"
+                >
+                    <path
+                        class="branch-trunk"
+                        d="M210,-20 C190,40 205,90 175,130 C150,165 165,205 135,245 C110,280 125,320 95,360 C70,395 85,435 55,470 C35,495 45,525 20,555"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M175,130 C195,140 210,135 222,115"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M135,245 C110,240 90,250 72,272"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M95,360 C118,352 138,360 150,340"
+                    />
+                    <path
+                        class="branch-twig"
+                        d="M55,470 C32,462 12,472 -2,455"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="198"
+                        y="103"
+                        transform="rotate(-25 198 103) scale(0.9)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="216"
+                        y="106"
+                        transform="scale(0.85)"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="58"
+                        y="263"
+                        transform="rotate(200 58 263) scale(0.8)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="66"
+                        y="276"
+                        transform="scale(0.7)"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="143"
+                        y="333"
+                        transform="rotate(-10 143 333) scale(0.75)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="150"
+                        y="336"
+                        transform="scale(0.65)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="-6"
+                        y="450"
+                        transform="scale(0.6)"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="16"
+                        y="548"
+                        transform="rotate(150 16 548) scale(0.7)"
+                    />
+                </svg>
+            </div>
+        </div>
 
-    <!-- تعريف نقش الزخرفة الجانبية المكرر (يُستخدم مرتين أعلاه) -->
-    <svg width="0" height="0" style="position: absolute">
-      <defs>
-        <g id="side-ornament-medallion">
-          <circle
-            cx="40"
-            cy="40"
-            r="16"
-            fill="none"
-            stroke="#d4af37"
-            stroke-width="1"
-          />
-          <circle
-            cx="40"
-            cy="40"
-            r="9"
-            fill="none"
-            stroke="#d4af37"
-            stroke-width="0.8"
-          />
-          <path
-            d="M40 18 L47 40 L40 62 L33 40 Z"
-            fill="none"
-            stroke="#d4af37"
-            stroke-width="0.8"
-          />
-          <path
-            d="M18 40 L40 33 L62 40 L40 47 Z"
-            fill="none"
-            stroke="#d4af37"
-            stroke-width="0.8"
-          />
-        </g>
-        <pattern
-          id="side-ornament-pattern"
-          x="0"
-          y="0"
-          width="80"
-          height="180"
-          patternUnits="userSpaceOnUse"
-        >
-          <line
-            x1="40"
-            y1="0"
-            x2="40"
-            y2="180"
-            stroke="#d4af37"
-            stroke-width="0.6"
-            stroke-dasharray="1 5"
-          />
-          <use href="#side-ornament-medallion" x="0" y="10" />
-          <path
-            d="M40 100 C 20 110, 20 140, 40 150 C 60 140, 60 110, 40 100 Z"
-            fill="none"
-            stroke="#d4af37"
-            stroke-width="0.8"
-          />
-          <circle cx="40" cy="125" r="3" fill="#d4af37" />
-        </pattern>
+        <!-- تعريف نقش الزخرفة الجانبية المكرر (يُستخدم مرتين أعلاه) -->
+        <svg width="0" height="0" style="position: absolute">
+            <defs>
+                <g id="side-ornament-medallion">
+                    <circle
+                        cx="40"
+                        cy="40"
+                        r="16"
+                        fill="none"
+                        stroke="#d4af37"
+                        stroke-width="1"
+                    />
+                    <circle
+                        cx="40"
+                        cy="40"
+                        r="9"
+                        fill="none"
+                        stroke="#d4af37"
+                        stroke-width="0.8"
+                    />
+                    <path
+                        d="M40 18 L47 40 L40 62 L33 40 Z"
+                        fill="none"
+                        stroke="#d4af37"
+                        stroke-width="0.8"
+                    />
+                    <path
+                        d="M18 40 L40 33 L62 40 L40 47 Z"
+                        fill="none"
+                        stroke="#d4af37"
+                        stroke-width="0.8"
+                    />
+                </g>
+                <pattern
+                    id="side-ornament-pattern"
+                    x="0"
+                    y="0"
+                    width="80"
+                    height="180"
+                    patternUnits="userSpaceOnUse"
+                >
+                    <line
+                        x1="40"
+                        y1="0"
+                        x2="40"
+                        y2="180"
+                        stroke="#d4af37"
+                        stroke-width="0.6"
+                        stroke-dasharray="1 5"
+                    />
+                    <use href="#side-ornament-medallion" x="0" y="10" />
+                    <path
+                        d="M40 100 C 20 110, 20 140, 40 150 C 60 140, 60 110, 40 100 Z"
+                        fill="none"
+                        stroke="#d4af37"
+                        stroke-width="0.8"
+                    />
+                    <circle cx="40" cy="125" r="3" fill="#d4af37" />
+                </pattern>
 
-        <!-- نقش أوراق وزهور الحديقة (Garden Patterns) -->
-        <g id="garden-leaf">
-          <path
-            d="M0 0 C 8 -12, 20 -12, 28 0 C 20 12, 8 12, 0 0Z"
-            fill="var(--green-sage)"
-            opacity="0.5"
-          />
-          <path
-            d="M0 0 L 28 0"
-            stroke="var(--green-moss)"
-            stroke-width="0.8"
-            opacity="0.6"
-          />
-        </g>
-        <g id="garden-flower">
-          <circle
-            cx="0"
-            cy="-6"
-            r="5"
-            fill="var(--green-pale)"
-            opacity="0.45"
-          />
-          <circle cx="6" cy="2" r="5" fill="var(--green-pale)" opacity="0.45" />
-          <circle
-            cx="-6"
-            cy="2"
-            r="5"
-            fill="var(--green-pale)"
-            opacity="0.45"
-          />
-          <circle cx="0" cy="0" r="3" fill="var(--green-sage)" opacity="0.6" />
-        </g>
-        <g id="garden-vine">
-          <path
-            d="M0 0 Q 10 -15, 5 -30 T 10 -60"
-            fill="none"
-            stroke="var(--green-moss)"
-            stroke-width="1.5"
-            opacity="0.4"
-          />
-          <circle
-            cx="5"
-            cy="-30"
-            r="4"
-            fill="var(--green-pale)"
-            opacity="0.4"
-          />
-          <path
-            d="M5 -30 Q 12 -35, 8 -42"
-            fill="none"
-            stroke="var(--green-moss)"
-            stroke-width="1"
-            opacity="0.35"
-          />
-        </g>
-        <pattern
-          id="garden-pattern"
-          x="0"
-          y="0"
-          width="80"
-          height="200"
-          patternUnits="userSpaceOnUse"
-        >
-          <use
-            href="#garden-leaf"
-            x="25"
-            y="20"
-            transform="scale(0.8) rotate(-20 40 20)"
-          />
-          <use href="#garden-flower" x="30" y="70" transform="scale(0.7)" />
-          <use href="#garden-vine" x="35" y="140" transform="scale(0.9)" />
-          <use
-            href="#garden-leaf"
-            x="20"
-            y="110"
-            transform="scale(0.6) rotate(30 40 110)"
-          />
-          <use href="#garden-flower" x="35" y="170" transform="scale(0.5)" />
-        </pattern>
-      </defs>
-    </svg>
+                <!-- نقش أوراق وزهور الحديقة (Garden Patterns) -->
+                <g id="garden-leaf">
+                    <path
+                        d="M0 0 C 8 -12, 20 -12, 28 0 C 20 12, 8 12, 0 0Z"
+                        fill="var(--green-sage)"
+                        opacity="0.5"
+                    />
+                    <path
+                        d="M0 0 L 28 0"
+                        stroke="var(--green-moss)"
+                        stroke-width="0.8"
+                        opacity="0.6"
+                    />
+                </g>
+                <g id="garden-flower">
+                    <circle
+                        cx="0"
+                        cy="-6"
+                        r="5"
+                        fill="var(--green-pale)"
+                        opacity="0.45"
+                    />
+                    <circle
+                        cx="6"
+                        cy="2"
+                        r="5"
+                        fill="var(--green-pale)"
+                        opacity="0.45"
+                    />
+                    <circle
+                        cx="-6"
+                        cy="2"
+                        r="5"
+                        fill="var(--green-pale)"
+                        opacity="0.45"
+                    />
+                    <circle
+                        cx="0"
+                        cy="0"
+                        r="3"
+                        fill="var(--green-sage)"
+                        opacity="0.6"
+                    />
+                </g>
+                <g id="garden-vine">
+                    <path
+                        d="M0 0 Q 10 -15, 5 -30 T 10 -60"
+                        fill="none"
+                        stroke="var(--green-moss)"
+                        stroke-width="1.5"
+                        opacity="0.4"
+                    />
+                    <circle
+                        cx="5"
+                        cy="-30"
+                        r="4"
+                        fill="var(--green-pale)"
+                        opacity="0.4"
+                    />
+                    <path
+                        d="M5 -30 Q 12 -35, 8 -42"
+                        fill="none"
+                        stroke="var(--green-moss)"
+                        stroke-width="1"
+                        opacity="0.35"
+                    />
+                </g>
+                <pattern
+                    id="garden-pattern"
+                    x="0"
+                    y="0"
+                    width="80"
+                    height="200"
+                    patternUnits="userSpaceOnUse"
+                >
+                    <use
+                        href="#garden-leaf"
+                        x="25"
+                        y="20"
+                        transform="scale(0.8) rotate(-20 40 20)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="30"
+                        y="70"
+                        transform="scale(0.7)"
+                    />
+                    <use
+                        href="#garden-vine"
+                        x="35"
+                        y="140"
+                        transform="scale(0.9)"
+                    />
+                    <use
+                        href="#garden-leaf"
+                        x="20"
+                        y="110"
+                        transform="scale(0.6) rotate(30 40 110)"
+                    />
+                    <use
+                        href="#garden-flower"
+                        x="35"
+                        y="170"
+                        transform="scale(0.5)"
+                    />
+                </pattern>
+            </defs>
+        </svg>
 
-    <!-- زهور متساقطة من الجانبين أثناء التمرير -->
-    <div id="side-flowers" aria-hidden="true"></div>
+        <!-- زهور متساقطة من الجانبين أثناء التمرير -->
+        <div id="side-flowers" aria-hidden="true"></div>
 
-    <!-- جسيمات ذهبية وبتلات عائمة في الخلفية -->
-    <div id="particles"></div>
+        <!-- جسيمات ذهبية وبتلات عائمة في الخلفية -->
+        <div id="particles"></div>
 
-    <!-- ============================================================
+        <!-- ============================================================
      القسم 1: الافتتاحية الدينية
 ============================================================ -->
-    <section id="opening">
-      <p class="opening-line" id="bismillah">بسم الله الرحمن الرحيم</p>
-      <p class="opening-line" id="ayah">
-        ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
-        لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ﴾
-      </p>
-      <p class="opening-line" id="sadaqallah">صدق الله العظيم</p>
-    </section>
+        <section id="opening">
+            <p class="opening-line" id="bismillah">بسم الله الرحمن الرحيم</p>
+            <p class="opening-line" id="ayah">
+                ﴿ وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+                لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+                ﴾
+            </p>
+            <p class="opening-line" id="sadaqallah">صدق الله العظيم</p>
+        </section>
 
-    <!-- ============================================================
+        <!-- ============================================================
      القسم 2: العنوان الرئيسي والأسماء
 ============================================================ -->
-    <section id="hero">
-      <div class="hero-frame reveal">
-        <div class="corner tl"><div class="diamond"></div></div>
-        <div class="corner tr"><div class="diamond"></div></div>
-        <div class="corner bl"><div class="diamond"></div></div>
-        <div class="corner br"><div class="diamond"></div></div>
+        <section id="hero">
+            <div class="hero-frame reveal">
+                <div class="corner tl"><div class="diamond"></div></div>
+                <div class="corner tr"><div class="diamond"></div></div>
+                <div class="corner bl"><div class="diamond"></div></div>
+                <div class="corner br"><div class="diamond"></div></div>
 
-        <p class="eyebrow">بكل الحب والامتنان</p>
-        <h1 class="main-title">دعوة لحضور خطوبه</h1>
+                <p class="eyebrow">بكل الحب والامتنان</p>
+                <h1 class="main-title">دعوة لحضور خطوبه</h1>
 
-        <div class="names-wrap">
-          <div class="name">الدكتور أحمد</div>
-          <div class="heart">❤</div>
-          <div class="name">الدكتورة ريم</div>
-        </div>
+                <div class="names-wrap">
+                    <div class="name">الدكتور أحمد</div>
+                    <div class="heart">❤</div>
+                    <div class="name">الدكتورة ريم</div>
+                </div>
 
-        <div class="gold-divider"></div>
-      </div>
-    </section>
+                <div class="gold-divider"></div>
+            </div>
+        </section>
 
-    <!-- ============================================================
+        <!-- ============================================================
      القسم 3: الكلمة الرئيسية
 ============================================================ -->
-    <section id="speech">
-      <div class="speech-card glass-card reveal">
-        <h2 class="section-title">كلمتنا إليكم</h2>
-        <div class="gold-divider"></div>
-        <div class="speech-text" id="speechText">
-          <p>
-            بكل الحب والفرح، تفتح قلوبنا أبوابها لتستقبل أعز الناس في يوم لطالما
-            انتظرناه بشوق.
-          </p>
-          <p>
-            فالزواج نعمة من الله، وسكن يبعث الطمأنينة في النفس، ومودة ترسم
-            للحياة أجمل معانيها.
-          </p>
-          <p>
-            ونحن، إذ نتهيأ لنبدأ معًا رحلة جديدة، نستحضر قول الله تعالى في
-            المودة والرحمة بين الزوجين.
-          </p>
-          <p>
-            نتشرف بحضوركم في هذه المناسبة الغالية على قلوبنا، فوجودكم يزيدها
-            بهاءً ويضفي عليها معنى أعمق.
-          </p>
-          <p>
-            مشاركتكم لنا هذه اللحظة تزيد فرحتنا وتجعلها ذكرى لا تُنسى في سجل
-            الأيام الجميلة.
-          </p>
-          <p>
-            فحضوركم يسعدنا، ويجعل من هذا اليوم عرسًا يليق بمحبتكم الصادقة
-            وصحبتكم الكريمة.
-          </p>
-          <p>
-            نحتفل اليوم ببداية رحلة جديدة، عنوانها الوفاء، وزادها الصبر، وغايتها
-            رضا الله سبحانه.
-          </p>
-          <p>
-            ونسأل الله أن يديم بيننا المودة والرحمة، وأن يجعل هذه الخطوبة بداية
-            خير وبركة وسعادة تدوم.
-          </p>
-          <p>
-            فأهلاً بكم أحبتنا، في يوم نخطّ فيه أجمل بداياتنا، ونكتب أول سطر في
-            قصة عمرنا معًا.
-          </p>
-        </div>
-      </div>
-    </section>
+        <section id="speech">
+            <div class="speech-card glass-card reveal">
+                <h2 class="section-title">كلمتنا إليكم</h2>
+                <div class="gold-divider"></div>
+                <div class="speech-text" id="speechText">
+                    <p>
+                        بكل الحب والفرح، تفتح قلوبنا أبوابها لتستقبل أعز الناس
+                        في يوم لطالما انتظرناه بشوق.
+                    </p>
+                    <p>
+                        فالزواج نعمة من الله، وسكن يبعث الطمأنينة في النفس،
+                        ومودة ترسم للحياة أجمل معانيها.
+                    </p>
+                    <p>
+                        ونحن، إذ نتهيأ لنبدأ معًا رحلة جديدة، نستحضر قول الله
+                        تعالى في المودة والرحمة بين الزوجين.
+                    </p>
+                    <p>
+                        نتشرف بحضوركم في هذه المناسبة الغالية على قلوبنا،
+                        فوجودكم يزيدها بهاءً ويضفي عليها معنى أعمق.
+                    </p>
+                    <p>
+                        مشاركتكم لنا هذه اللحظة تزيد فرحتنا وتجعلها ذكرى لا
+                        تُنسى في سجل الأيام الجميلة.
+                    </p>
+                    <p>
+                        فحضوركم يسعدنا، ويجعل من هذا اليوم عرسًا يليق بمحبتكم
+                        الصادقة وصحبتكم الكريمة.
+                    </p>
+                    <p>
+                        نحتفل اليوم ببداية رحلة جديدة، عنوانها الوفاء، وزادها
+                        الصبر، وغايتها رضا الله سبحانه.
+                    </p>
+                    <p>
+                        ونسأل الله أن يديم بيننا المودة والرحمة، وأن يجعل هذه
+                        الخطوبة بداية خير وبركة وسعادة تدوم.
+                    </p>
+                    <p>
+                        فأهلاً بكم أحبتنا، في يوم نخطّ فيه أجمل بداياتنا، ونكتب
+                        أول سطر في قصة عمرنا معًا.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-    <!-- ============================================================
+        <!-- ============================================================
      القسم 4: دعوة عائلتي العروسين
 ============================================================ -->
-    <section id="family">
-      <p class="family-intro reveal">
-        يسر عائلتا العروسين دعوتكم لتشريفهما بحفل خطوبة نجليهما
-      </p>
-      <div class="couple-cards">
-        <div class="couple-card glass-card shimmer-border reveal">
-          <div class="ring">🤵</div>
-          <p class="role">العريس</p>
-          <p class="cname">الدكتور أحمد</p>
-        </div>
-        <div class="couple-card glass-card shimmer-border reveal">
-          <div class="ring">👰</div>
-          <p class="role">العروس</p>
-          <p class="cname">الدكتورة ريم</p>
-        </div>
-      </div>
-    </section>
+        <section id="family">
+            <p class="family-intro reveal">
+                يسر عائلتا العروسين دعوتكم لتشريفهما بحفل خطوبة نجليهما
+            </p>
+            <div class="couple-cards">
+                <div class="couple-card glass-card shimmer-border reveal">
+                    <div class="ring">🤵</div>
+                    <p class="role">العريس</p>
+                    <p class="cname">الدكتور أحمد</p>
+                </div>
+                <div class="couple-card glass-card shimmer-border reveal">
+                    <div class="ring">👰</div>
+                    <p class="role">العروس</p>
+                    <p class="cname">الدكتورة ريم</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- ============================================================
+        <!-- ============================================================
      القسم 5: موعد الحفل + العد التنازلي
 ============================================================ -->
-    <section id="details">
-      <h2 class="section-title reveal">موعد الخطوب</h2>
-      <div class="gold-divider reveal"></div>
+        <section id="details">
+            <h2 class="section-title reveal">موعد الخطوب</h2>
+            <div class="gold-divider reveal"></div>
 
-      <div class="details-grid">
-        <div class="detail-card glass-card reveal">
-          <span class="icon">📅</span>
-          <p class="label">التاريخ</p>
-          <p class="value">الجمعة<br />31 / 7 / 2026</p>
-        </div>
-        <div class="detail-card glass-card reveal">
-          <span class="icon">🕗</span>
-          <p class="label">الساعة</p>
-          <p class="value">8:00 مساءً</p>
-        </div>
-        <div class="detail-card glass-card reveal">
-          <span class="icon">📍</span>
-          <p class="label">المكان</p>
-          <p class="value">الرواد الكيلو 67 طريق اسكندريه</p>
-        </div>
-      </div>
+            <div class="details-grid">
+                <div class="detail-card glass-card reveal">
+                    <span class="icon">📅</span>
+                    <p class="label">التاريخ</p>
+                    <p class="value">الجمعة<br />31 / 7 / 2026</p>
+                </div>
+                <div class="detail-card glass-card reveal">
+                    <span class="icon">🕗</span>
+                    <p class="label">الساعة</p>
+                    <p class="value">5:00 مساءً</p>
+                </div>
+                <div class="detail-card glass-card reveal">
+                    <span class="icon">📍</span>
+                    <p class="label">المكان</p>
+                    <p class="value">الرواد الكيلو 67 طريق اسكندريه</p>
+                </div>
+            </div>
 
-      <a
-        class="map-btn reveal"
-        href="https://maps.app.goo.gl/qKMHDVaSjHWZFryL8?g_st=aw"
-        target="_blank"
-        rel="noopener"
-      >
-        عرض الموقع 📍
-      </a>
+            <a
+                class="map-btn reveal"
+                href="https://maps.app.goo.gl/qKMHDVaSjHWZFryL8?g_st=aw"
+                target="_blank"
+                rel="noopener"
+            >
+                عرض الموقع 📍
+            </a>
 
-      <!-- العد التنازلي -->
-      <div class="countdown reveal" id="countdown">
-        <div class="count-box">
-          <span class="count-num" id="cd-days">00</span>
-          <p class="count-label">الأيام</p>
-        </div>
-        <div class="count-box">
-          <span class="count-num" id="cd-hours">00</span>
-          <p class="count-label">الساعات</p>
-        </div>
-        <div class="count-box">
-          <span class="count-num" id="cd-minutes">00</span>
-          <p class="count-label">الدقائق</p>
-        </div>
-        <div class="count-box">
-          <span class="count-num" id="cd-seconds">00</span>
-          <p class="count-label">الثواني</p>
-        </div>
-      </div>
-    </section>
+            <!-- العد التنازلي -->
+            <div class="countdown reveal" id="countdown">
+                <div class="count-box">
+                    <span class="count-num" id="cd-days">00</span>
+                    <p class="count-label">الأيام</p>
+                </div>
+                <div class="count-box">
+                    <span class="count-num" id="cd-hours">00</span>
+                    <p class="count-label">الساعات</p>
+                </div>
+                <div class="count-box">
+                    <span class="count-num" id="cd-minutes">00</span>
+                    <p class="count-label">الدقائق</p>
+                </div>
+                <div class="count-box">
+                    <span class="count-num" id="cd-seconds">00</span>
+                    <p class="count-label">الثواني</p>
+                </div>
+            </div>
+        </section>
 
-    <!-- ============================================================
+        <!-- ============================================================
      القسم 7: رسالة للضيوف
 ============================================================ -->
-    <section id="guest-message">
-      <div class="message-card glass-card shimmer-border reveal">
-        وجودكم بيننا هو أجمل هدية، ولا تكتمل فرحتنا إلا بحضوركم.
-      </div>
-    </section>
+        <section id="guest-message">
+            <div class="message-card glass-card shimmer-border reveal">
+                وجودكم بيننا هو أجمل هدية، ولا تكتمل فرحتنا إلا بحضوركم.
+            </div>
+        </section>
 
-    <!--
+        <!--
 ============================================================
      التذييل
 ============================================================
 -->
-    <footer>
-      <p class="footer-dua reveal">
-        بارك الله لهما وبارك عليهما وجمع بينهما في خير
-      </p>
-      <div class="footer-names reveal">
-        <span>الدكتور أحمد</span>
-        <span>🤍</span>
-        <span>الدكتورة ريم</span>
-      </div>
-      <p class="footer-wait reveal">ننتظر حضوركم بكل حب</p>
-    </footer>
+        <footer>
+            <p class="footer-dua reveal">
+                بارك الله لهما وبارك عليهما وجمع بينهما في خير
+            </p>
+            <div class="footer-names reveal">
+                <span>الدكتور أحمد</span>
+                <span>🤍</span>
+                <span>الدكتورة ريم</span>
+            </div>
+            <p class="footer-wait reveal">ننتظر حضوركم بكل حب</p>
+        </footer>
 
-    <!-- مؤشر صغير لحالة الموسيقى (يظهر بعد الضغط على زر التشغيل) -->
-    <div
-      id="music-indicator"
-      aria-label="حالة الموسيقى"
-      title="الموسيقى تعمل — اضغط للكتم"
-    >
-      <span class="dot" id="musicDot"></span>
-      <span id="musicIcon">🔊</span>
-    </div>
+        <!-- مؤشر صغير لحالة الموسيقى (يظهر بعد الضغط على زر التشغيل) -->
+        <div
+            id="music-indicator"
+            aria-label="حالة الموسيقى"
+            title="الموسيقى تعمل — اضغط للكتم"
+        >
+            <span class="dot" id="musicDot"></span>
+            <span id="musicIcon">🔊</span>
+        </div>
 
-    <!-- الموسيقى الخلفية — ضع ملف music.mp3 بجانب هذا الملف -->
-    <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
+        <!-- الموسيقى الخلفية — ضع ملف music.mp3 بجانب هذا الملف -->
+        <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
 
-    <script src="script.js"></script>
-  </body>
+        <script src="script.js"></script>
+    </body>
 </html>

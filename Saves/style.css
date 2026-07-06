@@ -17,18 +17,6 @@
   --green-sage:#8a9a6e;
   --green-moss:#7a8c62;
   --green-pale:#c7d9b7;
-
-  /* ألوان البحر والرمال والمساحة الخضراء (خلفية المشهد الكاملة) */
-  --sea-deep:#0f3d5c;
-  --sea-mid:#157a8c;
-  --sea-light:#4fb9bd;
-  --sea-foam:#bdeee0;
-  --sand-wet:#e8d9a0;
-  --sand-dry:#f2e2ab;
-  --grass-light:#cfe0a0;
-  --grass-mid:#93bf72;
-  --grass-deep:#5f8248;
-  --grass-deepest:#456338;
 }
 
 *{ box-sizing:border-box; margin:0; padding:0; }
@@ -37,25 +25,10 @@ html{ scroll-behavior:smooth; }
 
 body{
   font-family:'Cairo', sans-serif;
-  /* المشهد الكامل: بحر عند الأعلى، يتحول إلى رمال، ثم إلى مساحة خضراء
-     كلما نزل الزائر لأسفل الصفحة. النسب أدناه هي نسب من الارتفاع
-     الكلي للصفحة بالكامل (وليس ارتفاع الشاشة)، فتتمدد تلقائيًا مع
-     المحتوى بغض النظر عن طوله. */
   background:
-    radial-gradient(circle at 20% 10%, rgba(212,175,55,0.10), transparent 40%),
+    radial-gradient(circle at 20% 10%, rgba(212,175,55,0.08), transparent 40%),
     radial-gradient(circle at 80% 90%, rgba(212,175,55,0.10), transparent 45%),
-    linear-gradient(to bottom,
-      var(--sea-deep)   0%,
-      var(--sea-mid)    7%,
-      var(--sea-light)  14%,
-      var(--sea-foam)   19%,
-      var(--sand-wet)   23%,
-      var(--sand-dry)   28%,
-      var(--grass-light) 35%,
-      var(--grass-mid)  55%,
-      var(--grass-deep) 78%,
-      var(--grass-deepest) 100%
-    );
+    linear-gradient(180deg, var(--ivory), var(--cream) 40%, var(--beige) 100%);
   color:var(--ink);
   overflow-x:hidden;
   position:relative;
@@ -382,9 +355,8 @@ section{ position:relative; z-index:1; }
   position:fixed;
   z-index:1;
   pointer-events:none;
-  color:var(--ivory);
-  opacity:0.75;
-  filter:drop-shadow(0 1px 3px rgba(20,40,50,0.25));
+  color:var(--green-moss);
+  opacity:0.7;
 }
 .bird svg{
   width:100%;
@@ -550,34 +522,13 @@ section{ position:relative; z-index:1; }
   text-align:center;
   padding:30px 18px;
   position:relative;
-  overflow:hidden;
-}
-/* بريق شمس هادئ ينعكس على سطح البحر */
-#opening::before{
-  content:"";
-  position:absolute;
-  top:8%; left:50%;
-  width:70vw; height:70vw;
-  max-width:640px; max-height:640px;
-  background:radial-gradient(circle, rgba(255,244,214,0.35), transparent 65%);
-  transform:translate(-50%,-50%);
-  animation:sunGlint 9s ease-in-out infinite;
-  pointer-events:none;
-  z-index:0;
-}
-@keyframes sunGlint{
-  0%,100%{ opacity:0.55; transform:translate(-50%,-50%) scale(1); }
-  50%{ opacity:0.9; transform:translate(-50%,-50%) scale(1.08); }
 }
 .opening-line{
   opacity:0;
   transform:translateY(14px);
   transition:opacity 1.4s ease, transform 1.4s ease;
   font-family:'Amiri', serif;
-  color:var(--gold-light);
-  position:relative;
-  z-index:1;
-  text-shadow:0 2px 10px rgba(10,40,55,0.35);
+  color:var(--gold-dark);
 }
 .opening-line.show{ opacity:1; transform:translateY(0); }
 
@@ -591,25 +542,24 @@ section{ position:relative; z-index:1; }
   font-size:clamp(19px, 3.4vw, 28px);
   line-height:2.1;
   max-width:780px;
-  color:var(--ivory);
+  color:var(--ink);
   font-style:italic;
   margin-bottom:26px;
 }
 #sadaqallah{
   font-size:clamp(16px, 2.6vw, 20px);
-  color:var(--gold-light);
+  color:var(--gold-dark);
 }
 .scroll-hint{
   position:absolute; bottom:34px;
-  font-size:13px; color:var(--ivory);
+  font-size:13px; color:var(--ink-soft);
   opacity:0; transition:opacity 1.5s ease 1s;
   display:flex; flex-direction:column; align-items:center; gap:6px;
-  z-index:1;
 }
 .scroll-hint.show{ opacity:0.85; }
 .scroll-hint span{
   width:1px; height:34px;
-  background:linear-gradient(var(--gold-light), transparent);
+  background:linear-gradient(var(--gold), transparent);
   animation:hintPulse 1.8s ease-in-out infinite;
 }
 @keyframes hintPulse{ 0%,100%{opacity:0.3;} 50%{opacity:1;} }
@@ -624,47 +574,17 @@ section{ position:relative; z-index:1; }
   text-align:center;
   padding:60px 20px;
   overflow:hidden;
-  position:relative;
 }
-/* طبقتا أمواج متحركتان عند أسفل قسم البطل، حيث يلامس البحر الشاطئ */
-#hero::before,
-#hero::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:-2px;
-  height:150px;
-  background-repeat:repeat-x;
-  background-position:0 bottom;
-  pointer-events:none;
-  z-index:0;
-}
-#hero::before{
-  height:170px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='170' viewBox='0 0 300 170'%3E%3Cpath d='M0,90 C37.5,60 75,60 112.5,90 C150,120 187.5,120 225,90 C262.5,60 300,60 337.5,90 L337.5,170 L0,170 Z' fill='%23bdeee0' fill-opacity='0.55'/%3E%3C/svg%3E");
-  background-size:300px 170px;
-  animation:waveDriftA 14s linear infinite;
-  opacity:0.75;
-}
-#hero::after{
-  height:130px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='130' viewBox='0 0 260 130'%3E%3Cpath d='M0,70 C32.5,45 65,45 97.5,70 C130,95 162.5,95 195,70 C227.5,45 260,45 292.5,70 L292.5,130 L0,130 Z' fill='%23ffffff' fill-opacity='0.45'/%3E%3C/svg%3E");
-  background-size:260px 130px;
-  animation:waveDriftB 9s linear infinite reverse;
-  opacity:0.6;
-}
-@keyframes waveDriftA{ from{ background-position-x:0; } to{ background-position-x:300px; } }
-@keyframes waveDriftB{ from{ background-position-x:0; } to{ background-position-x:260px; } }
 .hero-frame{
   position:relative;
   padding:60px 34px;
   max-width:640px;
   width:100%;
   border-radius:20px;
-  background:rgba(255,255,255,0.28);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
-  box-shadow:0 0 0 1px rgba(212,175,55,0.2), 0 20px 60px rgba(15,60,80,0.18);
-  z-index:1;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(4px);
+  -webkit-backdrop-filter:blur(4px);
+  box-shadow:0 0 0 1px rgba(212,175,55,0.15), 0 20px 60px rgba(120,95,35,0.10);
 }
 .corner{
   position:absolute;
@@ -715,8 +635,6 @@ section{ position:relative; z-index:1; }
   color:var(--gold-dark);
   text-transform:uppercase;
   margin-bottom:14px;
-  position:relative;
-  z-index:1;
 }
 .main-title{
   font-family:'Amiri', serif;
@@ -724,9 +642,7 @@ section{ position:relative; z-index:1; }
   font-size:clamp(30px, 5.2vw, 48px);
   color:var(--ink);
   margin-bottom:8px;
-  text-shadow:0 0 26px rgba(255,255,255,0.5);
-  position:relative;
-  z-index:1;
+  text-shadow:0 0 26px rgba(212,175,55,0.25);
 }
 .names-wrap{
   display:flex; flex-direction:column;
@@ -1038,26 +954,23 @@ footer{
 .footer-dua{
   font-family:'Amiri', serif;
   font-size:clamp(17px, 2.6vw, 22px);
-  color:var(--gold-light);
+  color:var(--gold-dark);
   max-width:600px;
   margin:0 auto 30px;
   line-height:2;
-  text-shadow:0 2px 8px rgba(20,35,15,0.35);
 }
 .footer-names{
   display:flex; align-items:center; justify-content:center;
   gap:14px;
   font-family:'Aref Ruqaa', serif;
   font-size:clamp(22px, 3.4vw, 30px);
-  color:var(--ivory);
+  color:var(--ink);
   margin-bottom:24px;
-  text-shadow:0 2px 8px rgba(20,35,15,0.35);
 }
 .footer-wait{
   font-size:15px;
-  color:var(--ivory);
+  color:var(--ink-soft);
   letter-spacing:1px;
-  opacity:0.9;
 }
 
 /* ==========================================================
