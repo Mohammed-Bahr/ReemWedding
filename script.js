@@ -226,22 +226,22 @@ document.addEventListener('DOMContentLoaded', () => {
    لمس أو ضغط سهم/مفتاح بنفسه، يتوقف التمرير التلقائي فورًا
    ونهائيًا ويُترك التحكم الكامل بين يديه لبقية الجولة.
 ============================================================ */
-(function autoScrollSetup(){
+(function autoScrollSetup() {
   'use strict';
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var rafId = null;
   var running = false;
   var stoppedByUser = false;
-  var speed = 0.9; /* بكسل تقريبًا لكل إطار — تمرير هادئ وبطيء */
+  var speed = 2.0; /* بكسل تقريبًا لكل إطار — تمرير هادئ وبطيء */
 
-  function atBottom(){
+  function atBottom() {
     return (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 4);
   }
 
-  function step(){
+  function step() {
     if (!running || stoppedByUser) return;
-    if (atBottom()){
+    if (atBottom()) {
       running = false;
       return;
     }
@@ -250,29 +250,29 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* أي تفاعل حقيقي من الزائر يوقف التمرير التلقائي نهائيًا */
-  var userEvents = ['wheel', 'touchstart', 'keydown', 'mousedown', 'pointerdown'];
+  // var userEvents = ['wheel', 'touchstart', 'keydown', 'mousedown', 'pointerdown'];
 
-  function stopForGood(){
+  function stopForGood() {
     if (stoppedByUser) return;
     stoppedByUser = true;
     running = false;
     if (rafId) cancelAnimationFrame(rafId);
-    userEvents.forEach(function(evt){ window.removeEventListener(evt, stopForGood); });
+    // userEvents.forEach(function(evt) { window.removeEventListener(evt, stopForGood); });
   }
 
-  function start(){
+  function start() {
     if (reducedMotion || stoppedByUser || running) return;
     running = true;
     /* attach only when scroll actually starts, so the initial click doesn't kill it */
-    userEvents.forEach(function(evt){
-      window.addEventListener(evt, stopForGood, { passive:true });
-    });
+    // userEvents.forEach(function(evt) {
+    //   window.addEventListener(evt, stopForGood, { passive: true });
+    // });
     rafId = requestAnimationFrame(step);
   }
 
   /* دعم تغيّر تفضيل تقليل الحركة أثناء التصفح */
   var motionMedia = window.matchMedia('(prefers-reduced-motion: reduce)');
-  motionMedia.addEventListener('change', function(e){
+  motionMedia.addEventListener('change', function(e) {
     reducedMotion = e.matches;
     if (reducedMotion) stopForGood();
   });
