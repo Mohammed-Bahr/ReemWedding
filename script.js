@@ -1,25 +1,57 @@
 /* ============================================================
-   1) إخفاء شاشة التحميل بعد اكتمال تحميل الصفحة
-============================================================ */
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.getElementById('loader').classList.add('hide');
-  }, 900);
-});
-
-/* ============================================================
-   2) تشغيل تسلسل الافتتاح جملة بجملة + ظهور تدريجي عند التمرير
+   1) تشغيل الموسيقى عند الضغط على الزر + إخفاء شاشة التحميل
+      + تشغيل تسلسل الافتتاح جملة بجملة + ظهور تدريجي عند التمرير
 ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
-  const lines = [
-    { el: document.getElementById('bismillah'), delay: 1400 },
-    { el: document.getElementById('ayah'), delay: 3400 },
-    { el: document.getElementById('sadaqallah'), delay: 6600 },
-  ];
-  lines.forEach(item => {
-    setTimeout(() => item.el.classList.add('show'), item.delay);
+  const audio = document.getElementById('bgMusic');
+  const loader = document.getElementById('loader');
+  const musicBtn = document.getElementById('musicStartBtn');
+  const indicator = document.getElementById('music-indicator');
+  const icon = document.getElementById('musicIcon');
+  let started = false;
+
+  function markPlaying() {
+    started = true;
+    indicator.classList.remove('muted');
+    icon.textContent = '🔊';
+  }
+  function markMuted() {
+    started = false;
+    indicator.classList.add('muted');
+    icon.textContent = '🔈';
+  }
+
+  /* الضغط على زر الموسيقى → تشغيل الموسيقى + إخفاء التحميل + بدء الافتتاح */
+  musicBtn.addEventListener('click', function onClick() {
+    audio.play().then(markPlaying).catch(markMuted);
+    loader.classList.add('hide');
+    setTimeout(() => { loader.style.display = 'none'; }, 1100);
+
+    /* تسلسل الافتتاح */
+    const lines = [
+      { el: document.getElementById('bismillah'), delay: 1400 },
+      { el: document.getElementById('ayah'), delay: 3400 },
+      { el: document.getElementById('sadaqallah'), delay: 6600 },
+    ];
+    lines.forEach(item => {
+      setTimeout(() => item.el.classList.add('show'), item.delay);
+    });
+    setTimeout(() => {
+      const hint = document.getElementById('scrollHint');
+      if (hint) hint.classList.add('show');
+    }, 7600);
+  }, { once: true });
+
+  /* زر المؤشر: تشغيل / إيقاف الموسيقى */
+  indicator.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (audio.paused) {
+      audio.play().then(markPlaying).catch(markMuted);
+    } else {
+      audio.pause();
+      markMuted();
+    }
   });
-  setTimeout(() => document.getElementById('scrollHint').classList.add('show'), 7600);
 
   /* الكلمة الرئيسية تظهر جملة بجملة عند وصولها للشاشة */
   const speechParas = document.querySelectorAll('#speechText p');
@@ -181,71 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setInterval(tick, 1000);
 })();
 
-/* ============================================================
-   5) تشغيل الموسيقى تلقائيًا عند فتح الصفحة
-   ------------------------------------------------------------
-   ملاحظة تقنية مهمة:
-   تفرض جميع المتصفحات الحديثة (Chrome, Safari, Firefox, Edge)
-   سياسة أمان تمنع تشغيل أي صوت تلقائيًا بصوت مسموع قبل أي
-   تفاعل من المستخدم مع الصفحة أو الموقع. هذا القيد يُفرض على
-   مستوى المتصفح نفسه ولا يمكن تجاوزه بأي كود برمجي.
-   لذلك الكود أدناه:
-   1) يحاول تشغيل الموسيقى تلقائيًا فور تحميل الصفحة مباشرة.
-   2) إن نجحت المحاولة (بعض المتصفحات تسمح بذلك) ستُسمع الموسيقى
-      فورًا دون أي ضغط على أي زر.
-   3) إن منعها المتصفح، سيتم تشغيلها تلقائيًا مع أول تفاعل
-      يقوم به الزائر مع الصفحة (تمرير، لمس، ضغطة في أي مكان)
-      دون الحاجة لوجود أو الضغط على زر تشغيل مخصص.
-   المؤشر الصغير أسفل يسار الشاشة هو فقط لعرض الحالة (تشغيل/كتم)
-   وليس شرطًا للتشغيل.
-============================================================ */
-(function autoPlayMusic() {
-  const audio = document.getElementById('bgMusic');
-  const indicator = document.getElementById('music-indicator');
-  const icon = document.getElementById('musicIcon');
-  let started = false;
 
-  function markPlaying() {
-    started = true;
-    indicator.classList.remove('muted');
-    icon.textContent = '🔊';
-  }
-  function markMuted() {
-    started = false;
-    indicator.classList.add('muted');
-    icon.textContent = '🔈';
-  }
-
-  function tryPlay() {
-    const playPromise = audio.play();
-    if (playPromise !== undefined) {
-      playPromise.then(markPlaying).catch(markMuted);
-    }
-  }
-
-  /* المحاولة الفورية عند تحميل الصفحة */
-  window.addEventListener('DOMContentLoaded', tryPlay);
-
-  /* شبكة أمان: أول تفاعل من أي نوع في أي مكان بالصفحة يشغّل
-     الموسيقى تلقائيًا إن كان المتصفح قد منع التشغيل الفوري */
-  const fallbackEvents = ['click', 'touchstart', 'keydown', 'scroll', 'mousemove'];
-  function fallbackStart() {
-    if (!started) tryPlay();
-    fallbackEvents.forEach(evt => document.removeEventListener(evt, fallbackStart));
-  }
-  fallbackEvents.forEach(evt => document.addEventListener(evt, fallbackStart, { once: false, passive: true }));
-
-  /* زر المؤشر: تشغيل / إيقاف الموسيقى */
-  indicator.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (audio.paused) {
-      tryPlay();
-    } else {
-      audio.pause();
-      markMuted();
-    }
-  });
-})();
 
 /* ============================================================
    6) الزهور المتساقطة من الجانبين أثناء التمرير

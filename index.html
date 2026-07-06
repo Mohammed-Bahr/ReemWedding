@@ -24,10 +24,17 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- شاشة التحميل -->
+    <!-- شاشة التحميل — اضغط لتشغيل الموسيقى -->
     <div id="loader">
-      <div class="loader-ornament">
-        <div class="loader-diamond"></div>
+      <div class="loader-music-screen">
+        <div class="loader-ornament">
+          <div class="loader-diamond"></div>
+        </div>
+        <button id="musicStartBtn" class="music-start-btn" aria-label="تشغيل الموسيقى">
+          <span class="music-start-icon">♫</span>
+          <span class="music-start-label">اضغط لتشغيل الموسيقى</span>
+          <span class="music-start-sub">ثم نبدأ رحلتنا</span>
+        </button>
       </div>
     </div>
 
@@ -400,11 +407,11 @@
       <p class="footer-wait reveal">ننتظر حضوركم بكل حب</p>
     </footer>
 
-    <!-- مؤشر صغير لحالة الموسيقى (تشغيل تلقائي، وليس زر انتظار) -->
+    <!-- مؤشر صغير لحالة الموسيقى (يظهر بعد الضغط على زر التشغيل) -->
     <div
       id="music-indicator"
       aria-label="حالة الموسيقى"
-      title="الموسيقى تعمل تلقائيًا — اضغط للكتم"
+      title="الموسيقى تعمل — اضغط للكتم"
     >
       <span class="dot" id="musicDot"></span>
       <span id="musicIcon">🔊</span>

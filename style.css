@@ -142,6 +142,52 @@ section{ position:relative; z-index:1; }
 }
 @keyframes loaderSpin{ to{ transform:rotate(360deg); } }
 
+.loader-music-screen{
+  display:flex; flex-direction:column;
+  align-items:center; gap:50px;
+}
+.music-start-btn{
+  background:linear-gradient(135deg, var(--gold-light), var(--gold) 60%, var(--gold-dark));
+  border:none;
+  border-radius:50%;
+  width:130px; height:130px;
+  cursor:pointer;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:6px;
+  box-shadow:0 8px 32px rgba(163,129,42,0.4), 0 0 60px rgba(212,175,55,0.25);
+  transition:transform .4s ease, box-shadow .4s ease;
+  animation:musicBtnPulse 2.5s ease-in-out infinite;
+  position:relative;
+}
+.music-start-btn:hover{
+  transform:scale(1.08);
+  box-shadow:0 14px 40px rgba(163,129,42,0.55), 0 0 80px rgba(212,175,55,0.35);
+}
+.music-start-btn:active{
+  transform:scale(0.95);
+}
+.music-start-icon{
+  font-size:38px;
+  color:var(--white);
+  line-height:1;
+}
+.music-start-label{
+  font-size:11px;
+  color:var(--white);
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+.music-start-sub{
+  font-size:10px;
+  color:rgba(255,255,255,0.8);
+  font-family:'Amiri', serif;
+}
+@keyframes musicBtnPulse{
+  0%,100%{ transform:scale(1); box-shadow:0 8px 32px rgba(163,129,42,0.4), 0 0 60px rgba(212,175,55,0.25); }
+  50%{ transform:scale(1.05); box-shadow:0 8px 32px rgba(163,129,42,0.5), 0 0 80px rgba(212,175,55,0.35); }
+}
+
 /* ==========================================================
    جسيمات ذهبية عائمة (خلفية دائمة)
 ========================================================== */
