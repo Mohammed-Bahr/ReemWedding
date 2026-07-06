@@ -43,6 +43,7 @@ html {
 
 body {
     font-family: "Cairo", sans-serif;
+    font-weight: 800;
     /* المشهد الكامل: بحر عند الأعلى، يتحول إلى رمال، ثم إلى مساحة خضراء
      كلما نزل الزائر لأسفل الصفحة. النسب أدناه هي نسب من الارتفاع
      الكلي للصفحة بالكامل (وليس ارتفاع الشاشة)، فتتمدد تلقائيًا مع
@@ -1142,6 +1143,13 @@ section {
     position: relative;
 }
 .section-title {
+    font-family: "Amiri", serif;
+    font-weight: 700;
+    font-size: clamp(24px, 4vw, 34px);
+    color: var(--white);
+    margin-bottom: 6px;
+}
+.section-title-2 {
     font-family: "Amiri", serif;
     font-weight: 700;
     font-size: clamp(24px, 4vw, 34px);
