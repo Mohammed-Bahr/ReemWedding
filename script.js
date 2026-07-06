@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var rafId = null;
   var running = false;
   var stoppedByUser = false;
-  var speed = 0.55; /* بكسل تقريبًا لكل إطار — تمرير هادئ وبطيء */
+  var speed = 0.9; /* بكسل تقريبًا لكل إطار — تمرير هادئ وبطيء */
 
   function atBottom(){
     return (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 4);
@@ -249,6 +249,9 @@ document.addEventListener('DOMContentLoaded', () => {
     rafId = requestAnimationFrame(step);
   }
 
+  /* أي تفاعل حقيقي من الزائر يوقف التمرير التلقائي نهائيًا */
+  var userEvents = ['wheel', 'touchstart', 'keydown', 'mousedown', 'pointerdown'];
+
   function stopForGood(){
     if (stoppedByUser) return;
     stoppedByUser = true;
@@ -257,15 +260,13 @@ document.addEventListener('DOMContentLoaded', () => {
     userEvents.forEach(function(evt){ window.removeEventListener(evt, stopForGood); });
   }
 
-  /* أي تفاعل حقيقي من الزائر يوقف التمرير التلقائي نهائيًا */
-  var userEvents = ['wheel', 'touchstart', 'keydown', 'mousedown', 'pointerdown'];
-  userEvents.forEach(function(evt){
-    window.addEventListener(evt, stopForGood, { passive:true });
-  });
-
   function start(){
     if (reducedMotion || stoppedByUser || running) return;
     running = true;
+    /* attach only when scroll actually starts, so the initial click doesn't kill it */
+    userEvents.forEach(function(evt){
+      window.addEventListener(evt, stopForGood, { passive:true });
+    });
     rafId = requestAnimationFrame(step);
   }
 
