@@ -1146,6 +1146,13 @@ section {
     font-family: "Amiri", serif;
     font-weight: 700;
     font-size: clamp(24px, 4vw, 34px);
+    color: var(--white);
+    margin-bottom: 6px;
+}
+.section-title-2 {
+    font-family: "Amiri", serif;
+    font-weight: 700;
+    font-size: clamp(24px, 4vw, 34px);
     color: var(--gold-dark);
     margin-bottom: 6px;
 }
