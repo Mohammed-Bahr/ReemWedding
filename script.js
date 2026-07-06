@@ -226,15 +226,35 @@ document.addEventListener('DOMContentLoaded', () => {
    لمس أو ضغط سهم/مفتاح بنفسه، يتوقف التمرير التلقائي فورًا
    ونهائيًا ويُترك التحكم الكامل بين يديه لبقية الجولة.
 ============================================================ */
+
 (function autoScrollSetup() {
   'use strict';
+  let isLongPress = false;
+  let timer;
 
+  function startLongPress() {
+      timer = setTimeout(() => {
+          isLongPress = true;
+      }, 500); // 500 ms = long press
+  }
+
+  function endLongPress() {
+      clearTimeout(timer);
+      isLongPress = false;
+  }
+  // Desktop (mouse)
+  window.addEventListener("mousedown", startLongPress);
+  window.addEventListener("mouseup", endLongPress);
+  window.addEventListener("mouseleave", endLongPress);
+
+  // Mobile (touch)
+  window.addEventListener("touchstart", startLongPress, { passive: true });
+  window.addEventListener("touchend", endLongPress);
+  window.addEventListener("touchcancel", endLongPress);
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var rafId = null;
   var running = false;
   var stoppedByUser = false;
-  var speed = 2.0; /* بكسل تقريبًا لكل إطار — تمرير هادئ وبطيء */
-
   function atBottom() {
     return (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 4);
   }
@@ -245,6 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
       running = false;
       return;
     }
+    const speed = isLongPress ? 10 : 2;
     window.scrollBy(0, speed);
     rafId = requestAnimationFrame(step);
   }
