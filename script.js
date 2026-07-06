@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var rafId = null;
   var running = false;
   var stoppedByUser = false;
-  var speed = 2.0; /* بكسل تقريبًا لكل إطار — تمرير هادئ وبطيء */
+  var speed = 2.5; /* بكسل تقريبًا لكل إطار — تمرير هادئ وبطيء */
 
   function atBottom() {
     return (window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 4);
